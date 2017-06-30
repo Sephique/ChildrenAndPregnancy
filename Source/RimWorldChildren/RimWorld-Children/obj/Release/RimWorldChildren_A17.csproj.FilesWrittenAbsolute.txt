@@ -6,3 +6,7 @@
 /home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll.mdb
 /home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll.mdb
 /home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll
+/home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenAndPregnancy/Assemblies/RimWorldChildren.dll.mdb
+/home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenAndPregnancy/Assemblies/RimWorldChildren.dll
+/home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenAndPregnancy/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll
+/home/thirite/Games/Rimworld_A17/RimWorld1557Linux/Mods/ChildrenAndPregnancy/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll.mdb
