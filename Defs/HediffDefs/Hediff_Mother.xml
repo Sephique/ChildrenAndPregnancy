@@ -5,7 +5,7 @@
     <defName>HumanPregnancy</defName>
     <hediffClass>RimWorldChildren.Hediff_HumanPregnancy</hediffClass>
     <defaultLabelColor>(0.7, 1.0, 0.7)</defaultLabelColor>
-    <initialSeverity>0.99</initialSeverity>
+    <initialSeverity>0.001</initialSeverity>
     <label>pregnant</label>
     <stages>
       <li>
