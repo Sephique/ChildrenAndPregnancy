@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Backstories>
+
+  <RimWorldChildren.BackstoryDef>
+    <defName>NA_Childhood_Disabled</defName>
+    <Title>Baby</Title>
+    <TitleShort>Baby</TitleShort>
+    <baseDescription>Still growing.</baseDescription>
+    <Slot>Childhood</Slot>
+    <WorkDisables>
+      <li>Animals</li>
+      <li>Artistic</li>
+      <li>Caring</li>
+      <li>Cleaning</li>
+      <li>Cooking</li>
+      <li>Crafting</li>
+      <li>Firefighting</li>
+      <li>Hauling</li>
+      <li>Intellectual</li>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>Mining</li>
+      <li>PlantWork</li>
+      <li>Social</li>
+      <li>Violent</li>
+    </WorkDisables>
+    <SpawnCategories>
+      <li>Civil</li>
+    </SpawnCategories>
+    <shuffleable>false</shuffleable>
+  </RimWorldChildren.BackstoryDef>
+  
+  <RimWorldChildren.BackstoryDef>
+    <defName>NA_Childhood</defName>
+    <Title>Child</Title>
+    <TitleShort>Child</TitleShort>
+    <baseDescription>Still growing.</baseDescription>
+    <Slot>Childhood</Slot>
+    <WorkDisables />
+    <SpawnCategories>
+      <li>Civil</li>
+    </SpawnCategories>
+    <shuffleable>false</shuffleable>
+  </RimWorldChildren.BackstoryDef>
+  
+  <RimWorldChildren.BackstoryDef>
+    <defName>NA_Adulthood</defName>
+    <Title>N/A</Title>
+    <TitleShort>N/A</TitleShort>
+    <baseDescription>Not yet applicable</baseDescription>
+    <Slot>Adulthood</Slot>
+    <WorkDisables />
+    <SpawnCategories>
+      <li>Civil</li>
+    </SpawnCategories>
+    <shuffleable>false</shuffleable>
+  </RimWorldChildren.BackstoryDef>
+  
+  <RimWorldChildren.BackstoryDef>
+    <defName>Rimchild</defName>
+    <Title>Rimworld child</Title>
+    <TitleShort>Rimchild</TitleShort>
+    <baseDescription>NAME was born and raised on a rimworld in the outer reaches of the galaxy.</baseDescription>
+    <Slot>Childhood</Slot>
+    <WorkDisables />
+    <SpawnCategories>
+      <li>Civil</li>
+    </SpawnCategories>
+    <shuffleable>false</shuffleable>
+  </RimWorldChildren.BackstoryDef>
+  
+</Backstories>
+

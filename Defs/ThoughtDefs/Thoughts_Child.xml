@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Thoughts>
+  
+  <ThoughtDef>
+    <defName>ScaredOfTheDark</defName>
+    <workerClass>RimWorldChildren.ThoughtWorker_ScaredOfTheDark</workerClass>
+    <stages>
+      <li>
+        <label>scared of the dark</label>
+        <description>It's too dark! I can see monsters creeping in the shadows!</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef> 
+  
+  <ThoughtDef>
+    <defName>GotToldOff</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <nullifyingTraits>
+      <li>Abrasive</li>
+    </nullifyingTraits>
+    <stages>
+      <li>
+	<label>got in trouble</label>
+        <description>I got in trouble for doing something I shouldn't have.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>GotDisciplined</defName>
+    <durationDays>1</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+	<label>got a beating</label>
+        <description>I got beaten as punishment.</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>  
+  
+</Thoughts>

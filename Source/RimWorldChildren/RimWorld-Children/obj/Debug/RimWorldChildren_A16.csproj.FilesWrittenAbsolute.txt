@@ -1,0 +1,4 @@
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll.mdb
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Debug/RimWorldChildren.dll
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Debug/RimWorldChildren.dll.mdb

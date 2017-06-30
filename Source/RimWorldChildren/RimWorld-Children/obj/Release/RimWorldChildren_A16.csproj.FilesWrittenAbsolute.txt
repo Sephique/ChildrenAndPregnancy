@@ -1,0 +1,8 @@
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll.mdb
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll
+/home/thirite/Games/RimWorld_A16/RimWorld1393Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll.mdb
+/home/thirite/Games/Rimworld_A17/RimWorld1546Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll
+/home/thirite/Games/Rimworld_A17/RimWorld1546Linux/Mods/ChildrenMod/Source/RimWorldChildren/RimWorld-Children/obj/Release/RimWorldChildren.dll.mdb
+/home/thirite/Games/Rimworld_A17/RimWorld1546Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll.mdb
+/home/thirite/Games/Rimworld_A17/RimWorld1546Linux/Mods/ChildrenMod/Assemblies/RimWorldChildren.dll

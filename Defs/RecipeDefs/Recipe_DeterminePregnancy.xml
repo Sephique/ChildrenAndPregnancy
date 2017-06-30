@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RecipeDefs>
+    
+  <RecipeDef>
+    <defName>DeterminePregnancy</defName>
+    <label>determine pregnancy</label>
+    <effectWorking>Surgery</effectWorking>
+    <soundWorking>Recipe_Surgery</soundWorking>
+    <workSpeedStat>MedicalOperationSpeed</workSpeedStat>
+    <workSkill>Medicine</workSkill>
+    <workSkillLearnFactor>10</workSkillLearnFactor>
+    <description>Determines if a colonist is pregnant or not.</description>
+    <workerClass>RimWorldChildren.Recipe_DeterminePregnancy</workerClass>
+    <jobString>Determining if colonist is pregnant.</jobString>
+    <workAmount>800</workAmount>
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <recipeUsers>
+      <li>Human</li>
+    </recipeUsers>
+    <skillRequirements>
+      <li>
+	<skill>Medicine</skill>
+	<minLevel>5</minLevel>
+      </li>
+    </skillRequirements>
+  </RecipeDef>
+  
+</RecipeDefs>

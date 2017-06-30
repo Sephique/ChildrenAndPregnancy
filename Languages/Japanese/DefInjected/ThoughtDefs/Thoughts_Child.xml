@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <ScaredOfTheDark.stages.0.label>暗いの怖い</ScaredOfTheDark.stages.0.label>
+  <ScaredOfTheDark.stages.0.description>暗すぎ！私には影に忍び寄る怪物が見えちゃう！</ScaredOfTheDark.stages.0.description>
+
+  <GotToldOff.stages.0.label>トラブルになった</GotToldOff.stages.0.label>
+  <GotToldOff.stages.0.description>私がやってはいけない事をしてしまい、トラブルになってしまった。</GotToldOff.stages.0.description>
+
+  <GotDisciplined.stages.0.label>殴られた</GotDisciplined.stages.0.label>
+  <GotDisciplined.stages.0.description>私は罰として殴られた。</GotDisciplined.stages.0.description>
+
+
+</LanguageData>

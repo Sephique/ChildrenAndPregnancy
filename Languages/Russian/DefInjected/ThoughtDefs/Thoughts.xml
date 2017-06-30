@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  
+  <!-- Thought Defs -->
+  
+  <rep>
+    <path>PostPartumDepression.stages[0].label</path>
+    <trans>послеродовая депрессия</trans>
+  </rep>
+  <rep>
+    <path>PostPartumDepression.stages[0].description</path>
+    <trans>Разве я не должна чувствовать себя счастливым в наличии ребенка ...? Я просто чувствую себя разбитым. Я не думаю, что я могу это сделать.</trans>
+  </rep>
+  <rep>
+    <path>PostPartumDepression.stages[1].label</path>
+    <trans>послеродовая депрессия</trans>
+  </rep>
+  <rep>
+    <path>PostPartumDepression.stages[1].description</path>
+    <trans>Я не могу заботиться о ребенке; Я даже не могу о себе позаботиться. Я ужасная мать.</trans>
+  </rep>
+  
+  <!--  Dead children thoughts -->
+  <rep>
+    <path>ChildDied.stages[0].label</path>
+    <trans>ребенок умер</trans>
+  </rep>
+  <rep>
+    <path>ChildDied.stages[0].description</path>
+    <trans>Ребенок умер. Я не могу поверить, что это происходит.</trans>
+  </rep>
+  
+  <rep>
+    <path>BabyStillborn.stages[0].label</path>
+    <trans>мой ребенок был мертворожденным</trans>
+  </rep>
+  <rep>
+    <path>BabyStillborn.stages[0].description</path>
+    <trans>Мой ребенок умер в утробе матери.</trans>
+  </rep>
+  
+  <!--  Birth thoughts  -->
+  <rep>
+    <path>IGaveBirthFirstTime.stages[0].label</path>
+    <trans>новая мать</trans>
+  </rep>
+  <rep>
+    <path>IGaveBirthFirstTime.stages[0].description</path>
+    <trans>Я принесла ребенка в мир; Я мать!</trans>
+  </rep>
+  
+  <rep>
+    <path>IGaveBirth.stages[0].label</path>
+    <trans>родила</trans>
+  </rep>
+  <rep>
+    <path>IGaveBirth.stages[0].description</path>
+    <trans>Я привела еще одного ребенка в мир!</trans>
+  </rep>
+  
+  <rep>
+    <path>PartnerGaveBirth.stages[0].label</path>
+    <trans>новый ребенок</trans>
+  </rep>
+  <rep>
+    <path>PartnerGaveBirth.stages[0].description</path>
+    <trans>Мой ребенок родился!</trans>
+  </rep>
+  
+  <!--  Children thoughts  -->
+  <rep>
+    <path>ScaredOfTheDark.stages[0].label</path>
+    <trans>боюсь темноты</trans>
+  </rep>
+  <rep>
+    <path>ScaredOfTheDark.stages[0].description</path>
+    <trans>Слишком темно! Я могу видеть монстров ползучего в тени!</trans>
+  </rep>
+  <rep>
+    <path>GotToldOff.stages[0].label</path>
+    <trans>попал в беду</trans>
+  </rep>
+  <rep>
+    <path>GotToldOff.stages[0].description</path>
+    <trans>Я попал в беду за то, что-то я не должен иметь.</trans>
+  </rep>
+  <rep>
+    <path>GotDisciplined.stages[0].label</path>
+    <trans>got a beating</trans>
+  </rep>
+  <rep>
+    <path>GotDisciplined.stages[0].description</path>
+    <trans>I got beaten as punishment.</trans>
+  </rep>
+  
+  <!-- Crying Baby Thought -->
+  <rep>
+    <path>CryingBaby.stages[0].label</path>
+    <trans>crying baby</trans>
+  </rep>
+  <rep>
+    <path>CryingBaby.stages[0].description</path>
+    <trans>There's a screaming baby in the vicinity. It's not a pleasant noise.</trans>
+  </rep>
+  <rep>
+    <path>CryingBaby.stages[1].label</path>
+    <trans>crying babies</trans>
+  </rep>
+  <rep>
+    <path>CryingBaby.stages[1].description</path>
+    <trans>There's multiple screaming babies near me. Make it stop!</trans>
+  </rep>
+    <rep>
+    <path>CryingBaby.stages[2].label</path>
+    <trans>crying babies</trans>
+  </rep>
+  <rep>
+    <path>CryingBaby.stages[2].description</path>
+    <trans>I'm surrounded by a horde of air-raid sirens in miniature human form! Kill me now!!!</trans>
+  </rep>
+  
+</LanguageData>

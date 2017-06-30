@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{99CE67A2-D50A-4528-AEFD-51CFDE02C9C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RimWorldChildren</RootNamespace>
+    <AssemblyName>RimWorldChildren</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Assemblies</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Assemblies</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\RimWorld1557Linux_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\RimWorld1557Linux_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\HugsLib\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HugsLib">
+      <HintPath>..\..\..\..\HugsLib\Assemblies\HugsLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Detours.cs" />
+    <Compile Include="DetourInjector.cs" />
+    <Compile Include="Tools\FieldAccessor.cs" />
+    <Compile Include="Tools\BackstoryDef.cs" />
+    <Compile Include="Children_Drawing.cs" />
+    <Compile Include="Children_Code.cs" />
+    <Compile Include="Hediffs\Hediff_AbortionPill.cs" />
+    <Compile Include="Hediffs\Hediff_Baby.cs" />
+    <Compile Include="Hediffs\Hediff_PostPregnancy.cs" />
+    <Compile Include="Hediffs\DebugTools.cs" />
+    <Compile Include="Hediffs\Hediff_BirthDefectTracker.cs" />
+    <Compile Include="Hediffs\Hediff_HumanPregnancy.cs" />
+    <Compile Include="Recipes\Recipe_DeterminePregnancy.cs" />
+    <Compile Include="Recipes\Recipe_Abortion.cs" />
+    <Compile Include="Thoughts\NewbornDeaths.cs" />
+    <Compile Include="Thoughts\Child_Thoughts.cs" />
+    <Compile Include="Buildings\Building_Crib.cs" />
+    <Compile Include="Jobs\Driver_DisciplineChild.cs" />
+    <Compile Include="Jobs\Driver_HugFriend.cs" />
+    <Compile Include="Jobs\Driver_ScoldChild.cs" />
+    <Compile Include="Jobs\Driver_PlayWithBaby.cs" />
+    <Compile Include="Jobs\Driver_BreastFeed.cs" />
+    <Compile Include="Hediffs\Hediff_UnhappyBaby.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_CryingBaby.cs" />
+    <Compile Include="Overrides\LovinOverride.cs" />
+    <Compile Include="Overrides\Pawn_WearOverride.cs" />
+    <Compile Include="Overrides\Thought_Overrides.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Tools\" />
+    <Folder Include="Hediffs\" />
+    <Folder Include="Recipes\" />
+    <Folder Include="Thoughts\" />
+    <Folder Include="Buildings\" />
+    <Folder Include="Jobs\" />
+    <Folder Include="Overrides\" />
+  </ItemGroup>
+</Project>

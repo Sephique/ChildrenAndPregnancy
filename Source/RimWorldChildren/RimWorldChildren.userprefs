@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="RimWorld-Children/RimWorldChildren.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RimWorld-Children/DetourInjector.cs">
+    <Files>
+      <File FileName="RimWorld-Children/Children.cs" Line="34" Column="34" />
+      <File FileName="RimWorld-Children/DetourInjector.cs" Line="38" Column="38" />
+      <File FileName="RimWorld-Children/LovinOverride.cs" Line="97" Column="97" />
+      <File FileName="RimWorld-Children/Thought_Overrides.cs" Line="76" Column="76" />
+      <File FileName="RimWorld-Children/Building_Crib.cs" Line="4" Column="4" />
+      <File FileName="RimWorld-Children/Hediff_Baby.cs" Line="8" Column="8" />
+      <File FileName="RimWorld-Children/BackstoryDef.cs" Line="17" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
