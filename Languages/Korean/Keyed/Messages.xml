@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <LabelGaveBirth>신생아</LabelGaveBirth>
+
+  <MessageIsPregnant>{0}가 임신했습니다!</MessageIsPregnant>
+  <MessageHumanBirth>{0}가 출산했습니다! 그녀는 아이의 이름을 「{1}」로 지었습니다.</MessageHumanBirth>
+  <MessageHavingContractions>{0}의 진통이 시작되었습니다.</MessageHavingContractions>
+
+</LanguageData>

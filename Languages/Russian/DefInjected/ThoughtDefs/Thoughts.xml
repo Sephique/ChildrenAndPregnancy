@@ -86,37 +86,37 @@
   </rep>
   <rep>
     <path>GotDisciplined.stages[0].label</path>
-    <trans>got a beating</trans>
+    <trans>получил избиение</trans>
   </rep>
   <rep>
     <path>GotDisciplined.stages[0].description</path>
-    <trans>I got beaten as punishment.</trans>
+    <trans>Я получил наказание в виде избиения.</trans>
   </rep>
   
   <!-- Crying Baby Thought -->
   <rep>
     <path>CryingBaby.stages[0].label</path>
-    <trans>crying baby</trans>
+    <trans>плачущий ребенок</trans>
   </rep>
   <rep>
     <path>CryingBaby.stages[0].description</path>
-    <trans>There's a screaming baby in the vicinity. It's not a pleasant noise.</trans>
+    <trans>В окрестностях есть кричащий ребенок. Это не приятный шум.</trans>
   </rep>
   <rep>
     <path>CryingBaby.stages[1].label</path>
-    <trans>crying babies</trans>
+    <trans>плачущие младенцы</trans>
   </rep>
   <rep>
     <path>CryingBaby.stages[1].description</path>
-    <trans>There's multiple screaming babies near me. Make it stop!</trans>
+    <trans>Рядом со мной много кричащих младенцев. Останови это!</trans>
   </rep>
     <rep>
     <path>CryingBaby.stages[2].label</path>
-    <trans>crying babies</trans>
+    <trans>плачущие младенцы</trans>
   </rep>
   <rep>
     <path>CryingBaby.stages[2].description</path>
-    <trans>I'm surrounded by a horde of air-raid sirens in miniature human form! Kill me now!!!</trans>
+    <trans>Я окружен ордой воздушных сирен в миниатюрной человеческой форме! Убей меня сейчас!!!</trans>
   </rep>
   
 </LanguageData>
