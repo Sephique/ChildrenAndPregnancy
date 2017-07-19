@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <WordHumanPregnancy>妊娠</WordHumanPregnancy>
   <LabelGaveBirth>新生児</LabelGaveBirth>
 
   <MessageIsPregnant>{0} は妊娠しました!</MessageIsPregnant>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   
+  <WordHumanPregnancy>Pregnancy</WordHumanPregnancy>
   <LabelGaveBirth>Newborn baby</LabelGaveBirth>
   
   <MessageIsPregnant>{0} is pregnant!</MessageIsPregnant>
