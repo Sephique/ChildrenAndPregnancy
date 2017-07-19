@@ -10,7 +10,7 @@
   <Operation Class="PatchOperationReplace">
     <xpath>/ThingDefs/ThingDef[defName = "Human"]/race/lifeStageAges/li[3]/minAge</xpath>
     <value>
-      <minAge>3.5</minAge>
+      <minAge>3</minAge>
     </value>
   </Operation>
   
@@ -19,8 +19,8 @@
     <value>
       <points>
         <li>(4,0)</li>
-        <li>(5,30)</li>
-        <li>(8,60)</li>
+        <li>(5,20)</li>
+        <li>(8,40)</li>
         <li>(14,90)</li>
         <li>(16,100)</li>
         <li>(50,100)</li>
