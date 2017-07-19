@@ -11,8 +11,8 @@
     </graphicData>
     <rotatable>false</rotatable>
     <statBases>
-      <WorkToMake>350</WorkToMake>
-      <MarketValue>30</MarketValue>
+      <WorkToMake>120</WorkToMake>
+      <MarketValue>15</MarketValue>
     </statBases>
     <techLevel>Industrial</techLevel>
     <ingestible>
@@ -31,7 +31,7 @@
       </recipeUsers>
     </recipeMaker>
     <costList>
-      <Neutroamine>1</Neutroamine>
+      <HerbalMedicine>1</HerbalMedicine>
     </costList>
     <comps>
       <li Class="CompProperties_Drug">
