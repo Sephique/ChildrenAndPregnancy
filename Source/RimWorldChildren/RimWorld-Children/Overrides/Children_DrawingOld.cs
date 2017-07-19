@@ -4,157 +4,70 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
+using Harmony;
 
 namespace RimWorldChildren
 {
 	public static class ChildGraphics
 	{
-		internal static void ResolveAgeGraphics(PawnGraphicSet graphics){
-			LongEventHandler.ExecuteWhenFinished (delegate {
+//		internal static void _ResolveAllGraphics(this PawnGraphicSet _this)
+//		{
+//			LongEventHandler.ExecuteWhenFinished(delegate {
+//
+//			_this.ClearCache ();
+//			if (_this.pawn.RaceProps.Humanlike) {
+//				ResolveAgeGraphics (_this);
+//				_this.ResolveApparelGraphics ();
+//			} else {
+//				PawnKindLifeStage curKindLifeStage = _this.pawn.ageTracker.CurKindLifeStage;
+//				if (_this.pawn.gender != Gender.Female || curKindLifeStage.femaleGraphicData == null) {
+//					_this.nakedGraphic = curKindLifeStage.bodyGraphicData.Graphic;
+//				} else {
+//					_this.nakedGraphic = curKindLifeStage.femaleGraphicData.Graphic;
+//				}
+//				_this.rottingGraphic = _this.nakedGraphic.GetColoredVersion (ShaderDatabase.CutoutSkin, PawnGraphicSet.RottingColor, PawnGraphicSet.RottingColor);
+//				if (_this.pawn.RaceProps.packAnimal) {
+//					_this.packGraphic = GraphicDatabase.Get<Graphic_Multi> (_this.nakedGraphic.path + "Pack", ShaderDatabase.Cutout, _this.nakedGraphic.drawSize, Color.white);
+//				}
+//				if (curKindLifeStage.dessicatedBodyGraphicData != null) {
+//					_this.dessicatedGraphic = curKindLifeStage.dessicatedBodyGraphicData.GraphicColoredFor (_this.pawn);
+//				}
+//			}
+//
+//			});
+//		}
 
-				if (!graphics.pawn.RaceProps.Humanlike) {
-					return;
-				}
-
-				// Beards
-				String beard = "";
-				if (graphics.pawn.story.hairDef != null) {
-					if (graphics.pawn.story.hairDef.hairTags.Contains ("Beard")) {
-						if (graphics.pawn.apparel.BodyPartGroupIsCovered (BodyPartGroupDefOf.UpperHead) && !graphics.pawn.story.hairDef.hairTags.Contains ("DrawUnderHat")) {
-							beard = "_BeardOnly";
-						}
-						if (graphics.pawn.ageTracker.CurLifeStageIndex <= 3) {
-							graphics.hairGraphic = GraphicDatabase.Get<Graphic_Multi> (DefDatabase<HairDef>.GetNamed ("Mop").texPath, ShaderDatabase.Cutout, Vector2.one, graphics.pawn.story.hairColor);
-						} else
-							graphics.hairGraphic = GraphicDatabase.Get<Graphic_Multi> (graphics.pawn.story.hairDef.texPath + beard, ShaderDatabase.Cutout, Vector2.one, graphics.pawn.story.hairColor);
-					} else
-						graphics.hairGraphic = GraphicDatabase.Get<Graphic_Multi> (graphics.pawn.story.hairDef.texPath, ShaderDatabase.Cutout, Vector2.one, graphics.pawn.story.hairColor);
-				}
-
-				// Reroute the graphics for children
-				// For babies and toddlers
-				if (graphics.pawn.ageTracker.CurLifeStageIndex <= 1) {
-					string toddler_hair = "Boyish";
-					if (graphics.pawn.gender == Gender.Female) {
-						toddler_hair = "Girlish";
-					}
-					graphics.hairGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/Children/Hairs/Child_" + toddler_hair, ShaderDatabase.Cutout, Vector2.one, graphics.pawn.story.hairColor);
-					graphics.headGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/null", ShaderDatabase.Cutout, Vector2.one, Color.white);
-				}
-
-				// The pawn is a baby
-				if (graphics.pawn.ageTracker.CurLifeStageIndex == 0) {
-					graphics.nakedGraphic = GraphicDatabase.Get<Graphic_Single> ("Things/Pawn/Humanlike/Children/Bodies/Newborn", ShaderDatabase.CutoutSkin, Vector2.one, graphics.pawn.story.SkinColor);
-				}
-
-				// The pawn is a toddler
-				if (graphics.pawn.ageTracker.CurLifeStageIndex == 1) {
-					string upright = "";
-					if (graphics.pawn.ageTracker.AgeBiologicalYears >= 2) {
-						upright = "Upright";
-					}
-					graphics.nakedGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/Children/Bodies/Toddler" + upright, ShaderDatabase.CutoutSkin, Vector2.one, graphics.pawn.story.SkinColor);
-				}
-		// The pawn is a child
-		else if (graphics.pawn.ageTracker.CurLifeStageIndex == 2) {
-					graphics.nakedGraphic = ChildGraphics.GetChildBodyGraphics (graphics, ShaderDatabase.CutoutSkin, graphics.pawn.story.SkinColor);
-					graphics.headGraphic = ChildGraphics.GetChildHeadGraphics (ShaderDatabase.CutoutSkin, graphics.pawn.story.SkinColor);
-				}
-		// Otherwise, just use the normal methods
-		else if (graphics.pawn.ageTracker.CurLifeStageIndex >= 3) {
-					graphics.nakedGraphic = GraphicGetter_NakedHumanlike.GetNakedBodyGraphic (graphics.pawn.story.bodyType, ShaderDatabase.CutoutSkin, graphics.pawn.story.SkinColor);
-					graphics.headGraphic = GraphicDatabaseHeadRecords.GetHeadNamed (graphics.pawn.story.HeadGraphicPath, graphics.pawn.story.SkinColor);
-				}
-
-				graphics.rottingGraphic = GraphicGetter_NakedHumanlike.GetNakedBodyGraphic (graphics.pawn.story.bodyType, ShaderDatabase.CutoutSkin, PawnGraphicSet.RottingColor);
-				graphics.dessicatedGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/HumanoidDessicated", ShaderDatabase.Cutout);
-				graphics.desiccatedHeadGraphic = GraphicDatabaseHeadRecords.GetHeadNamed (graphics.pawn.story.HeadGraphicPath, PawnGraphicSet.RottingColor);
-				graphics.skullGraphic = GraphicDatabaseHeadRecords.GetSkull ();
-			});
-		}
-
-		internal static void _ResolveAllGraphics(this PawnGraphicSet _this)
-		{
-			LongEventHandler.ExecuteWhenFinished(delegate {
-
-			_this.ClearCache ();
-			if (_this.pawn.RaceProps.Humanlike) {
-				ResolveAgeGraphics (_this);
-				_this.ResolveApparelGraphics ();
-			} else {
-				PawnKindLifeStage curKindLifeStage = _this.pawn.ageTracker.CurKindLifeStage;
-				if (_this.pawn.gender != Gender.Female || curKindLifeStage.femaleGraphicData == null) {
-					_this.nakedGraphic = curKindLifeStage.bodyGraphicData.Graphic;
-				} else {
-					_this.nakedGraphic = curKindLifeStage.femaleGraphicData.Graphic;
-				}
-				_this.rottingGraphic = _this.nakedGraphic.GetColoredVersion (ShaderDatabase.CutoutSkin, PawnGraphicSet.RottingColor, PawnGraphicSet.RottingColor);
-				if (_this.pawn.RaceProps.packAnimal) {
-					_this.packGraphic = GraphicDatabase.Get<Graphic_Multi> (_this.nakedGraphic.path + "Pack", ShaderDatabase.Cutout, _this.nakedGraphic.drawSize, Color.white);
-				}
-				if (curKindLifeStage.dessicatedBodyGraphicData != null) {
-					_this.dessicatedGraphic = curKindLifeStage.dessicatedBodyGraphicData.GraphicColoredFor (_this.pawn);
-				}
-			}
-
-			});
-		}
-
-		// My own methods
-		internal static Graphic GetChildHeadGraphics(Shader shader, Color skinColor)
-		{
-			string str = "Male_Child";
-			string path = "Things/Pawn/Humanlike/Children/Heads/" + str;
-			return GraphicDatabase.Get<Graphic_Multi> (path, shader, Vector2.one, skinColor);
-		}
-		internal static Graphic GetChildBodyGraphics(this PawnGraphicSet _this, Shader shader, Color skinColor)
-		{
-			string str = "Naked_Boy";
-			if (_this.pawn.gender == Gender.Female) {
-				str = "Naked_Girl";
-			}
-			string path = "Things/Pawn/Humanlike/Children/Bodies/" + str;
-			return GraphicDatabase.Get<Graphic_Multi> (path, shader, Vector2.one, skinColor);
-		}
-
-		// ResolveApparelGraphics Detour
-		internal static void _ResolveApparelGraphics (this PawnGraphicSet _this)
-		{
-			// Updates the beard
-			if (_this.pawn.apparel.BodyPartGroupIsCovered (BodyPartGroupDefOf.UpperHead) && _this.pawn.RaceProps.Humanlike) {
-				ResolveAgeGraphics (_this);
-			}
-
-			LongEventHandler.ExecuteWhenFinished (delegate {
-				_this.ClearCache ();
-				_this.apparelGraphics.Clear ();
-				if (_this.pawn.apparel.WornApparelCount > 0) {
-					foreach (Apparel current in _this.pawn.apparel.WornApparelInDrawOrder) {
-						ApparelGraphicRecord item;
-
-						// Default to draw with the specific body-type of the adult pawn
-						BodyType _bodytype = _this.pawn.story.bodyType;
-
-						// If the pawn is a child always use the Thin BodyType
-						if (_this.pawn.ageTracker.CurLifeStageIndex == 2) {
-							_bodytype = BodyType.Thin;
-						}
-						// If we have a graphic meeting the requirements...
-						if (ApparelGraphicRecordGetter.TryGetGraphicApparel (current, _bodytype, out item)) {
-							// adds the piece of apparel to the list of apparelGraphics
-							_this.apparelGraphics.Add (item);
-						}
-					}
-				}
-			});
-		}
-
-		internal static void _ApparelChanged (this Pawn_ApparelTracker _this)
-		{
-			_this.pawn.Drawer.renderer.graphics.ResolveApparelGraphics ();
-			ResolveAgeGraphics (_this.pawn.Drawer.renderer.graphics);
-			PortraitsCache.SetDirty (_this.pawn);
-		}
+//		// ResolveApparelGraphics Detour
+//		internal static void _ResolveApparelGraphics (this PawnGraphicSet _this)
+//		{
+//			// Updates the beard
+//			if (_this.pawn.apparel.BodyPartGroupIsCovered (BodyPartGroupDefOf.UpperHead) && _this.pawn.RaceProps.Humanlike) {
+//				ResolveAgeGraphics (_this);
+//			}
+//
+//			LongEventHandler.ExecuteWhenFinished (delegate {
+//				_this.ClearCache ();
+//				_this.apparelGraphics.Clear ();
+//				if (_this.pawn.apparel.WornApparelCount > 0) {
+//					foreach (Apparel current in _this.pawn.apparel.WornApparelInDrawOrder) {
+//						ApparelGraphicRecord item;
+//
+//						// Default to draw with the specific body-type of the adult pawn
+//						BodyType _bodytype = _this.pawn.story.bodyType;
+//
+//						// If the pawn is a child always use the Thin BodyType
+//						if (_this.pawn.ageTracker.CurLifeStageIndex == 2) {
+//							_bodytype = BodyType.Thin;
+//						}
+//						// If we have a graphic meeting the requirements...
+//						if (ApparelGraphicRecordGetter.TryGetGraphicApparel (current, _bodytype, out item)) {
+//							// adds the piece of apparel to the list of apparelGraphics
+//							_this.apparelGraphics.Add (item);
+//						}
+//					}
+//				}
+//			});
+//		}
 
 		internal static readonly Func<PawnRenderer, Pawn> _pawnRPI = FieldAccessor.GetFieldAccessor<PawnRenderer, Pawn> ("pawn");
 		internal static readonly Func<PawnRenderer, PawnWoundDrawer> _pwdRPI = FieldAccessor.GetFieldAccessor<PawnRenderer, PawnWoundDrawer>("woundOverlays");

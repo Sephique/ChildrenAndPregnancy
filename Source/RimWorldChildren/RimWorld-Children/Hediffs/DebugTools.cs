@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using Verse.AI;
 using Verse;
+using Harmony;
 
 namespace RimWorldChildren
 {
@@ -10,7 +11,7 @@ namespace RimWorldChildren
 		public override void Tick ()
 		{
 			if (pawn.InBed ()) {
-				Job lovin = Lovin_Override._TryGiveJob (pawn);
+				Job lovin = (Job)AccessTools.Method (typeof(JobGiver_DoLovin), "TryGiveJob").Invoke (pawn, null);
 				if (lovin != null) {
 					pawn.jobs.StopAll (true);
 					pawn.jobs.StartJob (lovin, JobCondition.InterruptForced, null, false, true, null);

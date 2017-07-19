@@ -82,7 +82,7 @@ namespace RimWorldChildren
 
 		public void DiscoverPregnancy (){
 			is_discovered = true;
-			Find.LetterStack.ReceiveLetter ("Pregnancy", "MessageIsPregnant".Translate (new object[] { pawn.LabelIndefinite () }), LetterDefOf.Good, pawn, null);
+			Find.LetterStack.ReceiveLetter ("WordHumanPregnancy".Translate(), "MessageIsPregnant".Translate (new object[] { pawn.LabelIndefinite () }), LetterDefOf.Good, pawn, null);
 		}
 
 		static List<TraitDef> genetic_traits = new List<TraitDef> {

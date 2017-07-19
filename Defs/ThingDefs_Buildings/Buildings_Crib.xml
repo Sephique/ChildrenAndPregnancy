@@ -5,7 +5,7 @@
     <defName>Crib</defName>
     <label>crib</label>
     <Description>A cute little crib perfect to keep a young child safe and warm at night.</Description>
-    <ThingClass>RimWorldChildren.Building_Crib</ThingClass>
+    <ThingClass>Building_Bed</ThingClass>
     <graphicData>
       <texPath>Things/Building/Furniture/Crib/crib</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -22,7 +22,7 @@
       <Beauty>8</Beauty>
       <WorkToMake>600</WorkToMake>
       <Mass>30</Mass>
-      <BedRestEffectiveness>1</BedRestEffectiveness>
+      <BedRestEffectiveness>1.2</BedRestEffectiveness>
       <Comfort>0.8</Comfort>
       <ImmunityGainSpeedFactor>1.1</ImmunityGainSpeedFactor>
     </statBases>
@@ -36,6 +36,7 @@
     <building>
       <Bed_ShowSleeperBody>False</Bed_ShowSleeperBody>
       <bed_healPerDay>7</bed_healPerDay>
+      <bed_maxBodySize>0.55</bed_maxBodySize>
     </building>
     <comps>
       <li Class="CompProperties_AffectedByFacilities">

@@ -2,14 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 using Verse;
 using Verse.AI;
+using Harmony;
+using System.Linq;
 
 namespace RimWorldChildren
 {
 	internal static class Wear_Override
 	{
-
 		internal static readonly Func<JobDriver_Wear, Pawn> _pawn = FieldAccessor.GetFieldAccessor<JobDriver_Wear, Pawn> ("pawn");
 
 		internal static IEnumerable<Toil> _MakeNewToils(this JobDriver_Wear _this)
