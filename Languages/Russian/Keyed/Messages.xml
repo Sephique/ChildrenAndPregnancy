@@ -8,4 +8,6 @@
   <MessageHumanBirth>{0} родила. Она назвала ребенка {1}.</MessageHumanBirth>
   <MessageHavingContractions>{0} начала схватки.</MessageHavingContractions>
   
+  <MessageWeaponTooLarge>Предупреждение: {0} слишком большой для {1}.</MessageWeaponTooLarge>
+  
 </LanguageData>

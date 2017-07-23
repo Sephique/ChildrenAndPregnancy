@@ -7,5 +7,7 @@
   <MessageIsPregnant>{0} は妊娠しました!</MessageIsPregnant>
   <MessageHumanBirth>{0} が出産しました！彼女は子供の名前を「{1}」と付けました。</MessageHumanBirth>
   <MessageHavingContractions>{0} の陣痛が始まりました。</MessageHavingContractions>
+  
+  <MessageWeaponTooLarge>Warning: A {0} is too large a weapon for {1} to safely handle.</MessageWeaponTooLarge>
 
 </LanguageData>

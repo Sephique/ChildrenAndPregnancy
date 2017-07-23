@@ -6,17 +6,17 @@
     <workerClass>RimWorldChildren.ThoughtWorker_NearParents</workerClass>
     <stages>
       <li>
-        <label>Near mom</label>
+        <label>near mom</label>
         <description>My mother is near me. I feel safe.</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>
       <li>
-        <label>Near dad</label>
+        <label>near dad</label>
         <description>My father is near me. I feel safe.</description>
         <baseMoodEffect>5</baseMoodEffect>
       </li>
       <li>
-        <label>Near mom and dad</label>
+        <label>near mom and dad</label>
         <description>My parents are with me. I feel safe and loved.</description>
         <baseMoodEffect>8</baseMoodEffect>
       </li>

@@ -119,4 +119,32 @@
     <trans>Я окружен ордой воздушных сирен в миниатюрной человеческой форме! Убей меня сейчас!!!</trans>
   </rep>
   
+  <!-- Near Parents Thought -->
+  <rep>
+    <path>NearParent.stages[0].label</path>
+    <trans>рядом с мамой</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[0].description</path>
+    <trans>Моя мать рядом со мной. Я чувствую себя в безопасности.</trans>
+  </rep>
+  
+  <rep>
+    <path>NearParent.stages[1].label</path>
+    <trans>рядом с папой</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[1].description</path>
+    <trans>Мой отец рядом со мной. Я чувствую себя в безопасности.</trans>
+  </rep>
+  
+  <rep>
+    <path>NearParent.stages[2].label</path>
+    <trans>рядом с мамой и папой</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[2].description</path>
+    <trans>Я с родителями. Я чувствую себя в безопасности и любим.</trans>
+  </rep>
+  
 </LanguageData>

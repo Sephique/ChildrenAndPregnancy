@@ -119,5 +119,34 @@
     <trans>I'm surrounded by a horde of air-raid sirens in miniature human form! Kill me now!!!</trans>
   </rep>
   
+  <!-- Near Parents Thought -->
+  <rep>
+    <path>NearParent.stages[0].label</path>
+    <trans>near mom</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[0].description</path>
+    <trans>My mother is near me. I feel safe.</trans>
+  </rep>
+  
+  <rep>
+    <path>NearParent.stages[1].label</path>
+    <trans>near dad</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[1].description</path>
+    <trans>My father is near me. I feel safe.</trans>
+  </rep>
+  
+  <rep>
+    <path>NearParent.stages[2].label</path>
+    <trans>near mom and dad</trans>
+  </rep>
+  <rep>
+    <path>NearParent.stages[2].description</path>
+    <trans>My parents are with me. I feel safe and loved.</trans>
+  </rep>
+  
+  
   
 </LanguageData>
