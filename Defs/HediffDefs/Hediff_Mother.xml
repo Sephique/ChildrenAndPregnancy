@@ -158,6 +158,23 @@
   </HediffDef>
   
   <HediffDef>
+    <defName>Lactating</defName>
+    <hediffClass>HediffWithComps</hediffClass>
+    <label>lactating</label>
+    <initialSeverity>0.001</initialSeverity>
+    <defaultLabelColor>(1.0, 1.0, 1.0)</defaultLabelColor>
+    <comps>
+      <!-- Disappears after two quadrams -->
+      <li Class="HediffCompProperties_Disappears">
+	<disappearsAfterTicks>
+	  <min>1800000</min>
+	  <max>2000000</max>
+	</disappearsAfterTicks>
+      </li>
+    </comps>
+  </HediffDef>
+  
+  <HediffDef>
     <defName>GaveBirthFlag</defName>
     <hediffClass>HediffWithComps</hediffClass>
     <label>has given birth before</label>

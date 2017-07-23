@@ -161,12 +161,13 @@ namespace RimWorldChildren
 
 		public void TickRare (){
 			// Update the graphics set
-			pawn.Drawer.renderer.graphics.ResolveAllGraphics ();
+			if(pawn.ageTracker.CurLifeStageIndex == AgeStage.Toddler)
+				pawn.Drawer.renderer.graphics.ResolveAllGraphics ();
 
 			if (pawn.ageTracker.CurLifeStageIndex <= 1) {
 				// Check if the baby is hungry, and if so, add the whiny baby hediff
-				if (((pawn.needs.food.CurLevelPercentage < pawn.needs.food.PercentageThreshHungry) ||
-					(pawn.needs.joy.CurLevelPercentage < 0.1f)) &&
+				if (pawn.needs.food != null && (pawn.needs.food.CurLevelPercentage < pawn.needs.food.PercentageThreshHungry ||
+					pawn.needs.joy.CurLevelPercentage < 0.1f) &&
 				    !pawn.health.hediffSet.HasHediff (HediffDef.Named ("UnhappyBaby"))
 				){
 					Log.Message ("Adding unhappy baby hediff");

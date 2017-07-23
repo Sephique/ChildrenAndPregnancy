@@ -26,16 +26,6 @@ namespace RimWorldChildren
 			}
 		}
 	}
-	[HarmonyPatch(typeof(RestUtility), "IsValidBedFor")]
-	public static class ValidBedForOverride
-	{
-		[HarmonyPostfix]
-		internal static void IsValidBedFor(ref bool __result, ref Pawn sleeper, ref Thing bedThing){
-			if (__result && sleeper.ageTracker.CurLifeStageIndex >= 3 && bedThing.def.defName.Contains ("Crib")) {
-				__result = false;
-			}
-		}
-	}
 	[HarmonyPatch(typeof(RestUtility), "FindBedFor", new []{typeof(Pawn), typeof(Pawn), typeof(bool),typeof(bool),typeof(bool)})]
 	public static class FindBedForOverride
 	{
@@ -60,24 +50,34 @@ namespace RimWorldChildren
 					}
 					return flag;
 				};
-				Building_Bed crib = (Building_Bed)GenClosest.ClosestThingReachable(sleeper.Position, sleeper.Map, ThingRequest.ForDef(ThingDef.Named("Building_Crib")), PathEndMode.OnCell,  TraverseParms.For (traveler), 9999, validator);
+				Building_Bed crib = (Building_Bed)GenClosest.ClosestThingReachable(sleeper.Position, sleeper.Map, ThingRequest.ForDef(ThingDef.Named("Crib")), PathEndMode.OnCell,  TraverseParms.For (traveler), 9999, validator);
 				if (crib != null && sleeper.Position.DistanceTo(__result.Position) * 0.25f > sleeper.Position.DistanceTo(crib.Position))
 					__result = crib;
 			}
 		}
 	}
-	[HarmonyPatch(typeof(RestUtility), "CanUseBedEver")]
-	public static class CanUseBedEverOverride
-	{
-		[HarmonyPostfix]
-		internal static void CanUseBedEverPatch(ref bool __result, ref Pawn p, ref ThingDef bedDef){
-			if (bedDef.defName.Contains("Crib") && p.ageTracker.CurLifeStageIndex >= 3) {
-				__result = false;
+
+	internal static class BedHarmonyPatches{
+		internal static IEnumerable<CodeInstruction> GetFloatMenuOptions_Transpiler(IEnumerable<CodeInstruction> instructions){
+			var ILs = instructions.ToList ();
+			int index = ILs.FindIndex (x => x.opcode == OpCodes.Brfalse);
+			List<CodeInstruction> injection = new List<CodeInstruction> {
+				new CodeInstruction(OpCodes.Ldarg_0),
+				new CodeInstruction(OpCodes.Ldfld, typeof(Building_Bed).GetNestedType("<GetFloatMenuOptions>c__Iterator155", AccessTools.all).GetField("myPawn", AccessTools.all)),
+				new CodeInstruction(OpCodes.Ldarg_0),
+				new CodeInstruction(OpCodes.Ldfld, typeof(Building_Bed).GetNestedType("<GetFloatMenuOptions>c__Iterator155", AccessTools.all).GetField("<>f__this", AccessTools.all)),
+				new CodeInstruction(OpCodes.Ldfld, typeof(Building_Bed).GetField("def")),
+				new CodeInstruction(OpCodes.Call, typeof(RestUtility).GetMethod("CanUseBedEver")),
+				new CodeInstruction(OpCodes.Brfalse, ILs[index].operand),
+			};
+			ILs.InsertRange (index + 1, injection);
+			foreach (CodeInstruction IL in ILs) {
+				yield return IL;
 			}
 		}
 	}
 
-	internal static class BedPatchMethods
+	public static class BedPatchMethods
 	{
 		public static IEnumerable<Pawn> BedCandidates(Building_Bed bed){
 			if (bed.def.defName.Contains("Crib") ){
@@ -86,6 +86,9 @@ namespace RimWorldChildren
 			}
 			else
 				return bed.Map.mapPawns.FreeHumanlikesOfFaction (Faction.OfPlayer);
+		}
+		public static bool IsCrib(Building_Bed bed){
+			return bed.def.defName.Contains ("Crib");
 		}
 	}
 }

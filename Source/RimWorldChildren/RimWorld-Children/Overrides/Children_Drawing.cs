@@ -57,7 +57,9 @@ namespace RimWorldChildren
 			}
 		}
 	}
+
 	[HarmonyPatch(typeof(PawnRenderer), "RenderPawnInternal", new [] { typeof(Vector3), typeof(Quaternion), typeof(Boolean), typeof(Rot4), typeof(Rot4), typeof(RotDrawMode), typeof(Boolean), typeof(Boolean)})]
+	[HarmonyBefore(new string[] { "rimworld.erdelf.alien_race.main"})]
 	public static class PawnRenderer_RenderPawnInternal_Patch{
 		[HarmonyTranspiler]
 		static IEnumerable<CodeInstruction> RenderPawnInternal_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator ILgen)
@@ -69,47 +71,62 @@ namespace RimWorldChildren
 			List<CodeInstruction> injection0 = new List<CodeInstruction> {
 				new CodeInstruction(OpCodes.Ldarg_0),
 				new CodeInstruction(OpCodes.Ldfld, typeof(PawnRenderer).GetField("pawn", AccessTools.all)),
-				new CodeInstruction(OpCodes.Ldarg_S, 7),
+				new CodeInstruction(OpCodes.Ldarg_S, 7), //portrait
 				new CodeInstruction(OpCodes.Call, typeof(Children_Drawing).GetMethod("ModifyChildYPosOffset")),
 			};
 			ILs.InsertRange (injectIndex0, injection0);
+			foreach(int i in new List<int>{5,6,7, 11, 24}){
+				ILs.InsertRange (ILs.FindIndex (x => x.opcode == OpCodes.Stloc_S && x.operand as LocalBuilder != null && ((LocalBuilder)x.operand).LocalIndex == i), injection0);
+			}
 
-			// Ensure pawn is a child or higher before drawing head
-			int injectIndex1 = ILs.FindIndex (x => x.opcode == OpCodes.Ldfld && x.operand == AccessTools.Field (typeof(PawnGraphicSet), "headGraphic")) + 2;
+			int injectIndex1 = ILs.FindIndex (x => x.opcode == OpCodes.Ldarg_3);
+			Label babyDrawBodyJump = ILgen.DefineLabel ();
+			ILs [injectIndex1 + 2].labels = new List<Label>{ babyDrawBodyJump };
 			List<CodeInstruction> injection1 = new List<CodeInstruction> {
-				new CodeInstruction (OpCodes.Ldloc_0),
-				new CodeInstruction (OpCodes.Ldfld, AccessTools.Field (typeof(Pawn), "ageTracker")),
-				new CodeInstruction (OpCodes.Call, AccessTools.Property (typeof(Pawn_AgeTracker), "CurLifeStageIndex").GetGetMethod ()),
-				new CodeInstruction (OpCodes.Ldc_I4_1),
-				new CodeInstruction (OpCodes.Blt, ILs [injectIndex1 - 1].operand),
+				new CodeInstruction (OpCodes.Ldarg_0),
+				new CodeInstruction (OpCodes.Ldfld, AccessTools.Field(typeof(PawnRenderer), "pawn")),
+				new CodeInstruction (OpCodes.Ldfld, AccessTools.Field(typeof(Pawn), "ageTracker")),
+				new CodeInstruction (OpCodes.Call, typeof(Pawn_AgeTracker).GetProperty("CurLifeStageIndex").GetGetMethod()),
+				new CodeInstruction (OpCodes.Ldc_I4_2),
+				new CodeInstruction (OpCodes.Blt, babyDrawBodyJump),
 			};
 			ILs.InsertRange (injectIndex1, injection1);
 
-			// Modify the scale of a hat graphic when worn by a child
-			int injectIndex2 = ILs.GetRange(injectIndex1, ILs.Count - injectIndex1).FindIndex (x => x.opcode == OpCodes.Stloc_S && x.operand is LocalBuilder && ((LocalBuilder)x.operand).LocalIndex == 16) + 1;
+			// Ensure pawn is a child or higher before drawing head
+			int injectIndex2 = ILs.FindIndex (x => x.opcode == OpCodes.Ldfld && x.operand == AccessTools.Field (typeof(PawnGraphicSet), "headGraphic")) + 2;
 			List<CodeInstruction> injection2 = new List<CodeInstruction> {
+				new CodeInstruction (OpCodes.Ldarg_0),
+				new CodeInstruction (OpCodes.Ldfld, typeof(PawnRenderer).GetField("pawn", AccessTools.all)),
+				new CodeInstruction (OpCodes.Call, typeof(Children_Drawing).GetMethod("EnsurePawnIsChildOrOlder")),
+				new CodeInstruction (OpCodes.Brfalse, ILs [injectIndex2 - 1].operand),
+			};
+			ILs.InsertRange (injectIndex2, injection2);
+
+			// Modify the scale of a hat graphic when worn by a child
+			int injectIndex3 = ILs.GetRange(injectIndex2, ILs.Count - injectIndex2).FindIndex (x => x.opcode == OpCodes.Stloc_S && x.operand is LocalBuilder && ((LocalBuilder)x.operand).LocalIndex == 16) + 1;
+			List<CodeInstruction> injection3 = new List<CodeInstruction> {
 				new CodeInstruction (OpCodes.Ldloc_S, 16),
 				new CodeInstruction (OpCodes.Ldarg_0),
 				new CodeInstruction (OpCodes.Ldfld, typeof(PawnRenderer).GetField("pawn", AccessTools.all)),
 				new CodeInstruction (OpCodes.Call, typeof(Children_Drawing).GetMethod("ModifyHatForChild")),
 				new CodeInstruction (OpCodes.Stloc_S, 16),
 			};
-			ILs.InsertRange (injectIndex2, injection2);
+			ILs.InsertRange (injectIndex3, injection3);
 
-			// Modify the scale of a hair graphic when worn by a child
-			int injectIndex3 = ILs.FindIndex (x => x.opcode == OpCodes.Callvirt && x.operand == AccessTools.Method (typeof(PawnGraphicSet), "HairMatAt")) + 2;
-			List<CodeInstruction> injection3 = new List<CodeInstruction> {
+			// Modify the scale of a hair graphic when drawn on a child
+			int injectIndex4 = ILs.FindIndex (x => x.opcode == OpCodes.Callvirt && x.operand == AccessTools.Method (typeof(PawnGraphicSet), "HairMatAt")) + 2;
+			List<CodeInstruction> injection4 = new List<CodeInstruction> {
 				new CodeInstruction (OpCodes.Ldloc_S, 18),
 				new CodeInstruction (OpCodes.Ldarg_0),
 				new CodeInstruction (OpCodes.Ldfld, typeof(PawnRenderer).GetField("pawn", AccessTools.all)),
 				new CodeInstruction (OpCodes.Call, AccessTools.Method(typeof(Children_Drawing), "ModifyHairForChild")),
 				new CodeInstruction (OpCodes.Stloc_S, 18),
 			};
-			ILs.InsertRange (injectIndex3, injection3);
+			ILs.InsertRange (injectIndex4, injection4);
 
 			// Modify the scale of clothing graphics when worn by a child
-			int injectIndex4 = ILs.FindIndex (x => x.opcode == OpCodes.Stloc_S && x.operand is LocalBuilder && ((LocalBuilder)x.operand).LocalIndex == 4) + 1;
-			List<CodeInstruction> injection4 = new List<CodeInstruction> {
+			int injectIndex5 = ILs.FindIndex (x => x.opcode == OpCodes.Stloc_S && x.operand is LocalBuilder && ((LocalBuilder)x.operand).LocalIndex == 4) + 1;
+			List<CodeInstruction> injection5 = new List<CodeInstruction> {
 				new CodeInstruction (OpCodes.Ldloc_S, 4),
 				new CodeInstruction (OpCodes.Ldarg_0),
 				new CodeInstruction (OpCodes.Ldfld, typeof(PawnRenderer).GetField ("pawn", AccessTools.all)),
@@ -117,14 +134,7 @@ namespace RimWorldChildren
 				new CodeInstruction (OpCodes.Call, typeof(Children_Drawing).GetMethod ("ModifyClothingForChild")),
 				new CodeInstruction (OpCodes.Stloc_S, 4),
 			};
-			ILs.InsertRange (injectIndex4, injection4);
-
-			// Replace all secondary ldarg.1 with ldloc.1
-			// This ensures they use the offset vector3 for children's height
-			int firstLdarg1 = ILs.FindIndex (x => x.opcode == OpCodes.Ldarg_1) + 1;
-			foreach (CodeInstruction IL in ILs.GetRange (firstLdarg1, ILs.Count - firstLdarg1).FindAll (x => x.opcode == OpCodes.Ldarg_1)) {
-				IL.opcode = OpCodes.Ldloc_1;
-			};
+			ILs.InsertRange (injectIndex5, injection5);
 
 			foreach (CodeInstruction IL in ILs) {
 				yield return IL;
@@ -132,12 +142,13 @@ namespace RimWorldChildren
 		}
 	}
 
-	public static class Children_Drawing
+	internal static class Children_Drawing
 	{
 		internal static void ResolveAgeGraphics(PawnGraphicSet graphics){
 			LongEventHandler.ExecuteWhenFinished (delegate {
 
-				if (!graphics.pawn.RaceProps.Humanlike) {
+				//if (!graphics.pawn.RaceProps.Humanlike) {
+				if (graphics.pawn.def.defName != "Human") {
 					return;
 				}
 
@@ -165,17 +176,17 @@ namespace RimWorldChildren
 					}
 					graphics.hairGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/Children/Hairs/Child_" + toddler_hair, ShaderDatabase.Cutout, Vector2.one, graphics.pawn.story.hairColor);
 					graphics.headGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/null", ShaderDatabase.Cutout, Vector2.one, Color.white);
-				}
 
-				// The pawn is a baby
-				if (graphics.pawn.ageTracker.CurLifeStageIndex == AgeStage.Baby) {
-					graphics.nakedGraphic = GraphicDatabase.Get<Graphic_Single> ("Things/Pawn/Humanlike/Children/Bodies/Newborn", ShaderDatabase.CutoutSkin, Vector2.one, graphics.pawn.story.SkinColor);
+					// The pawn is a baby
+					if (graphics.pawn.ageTracker.CurLifeStageIndex == AgeStage.Baby) {
+						graphics.nakedGraphic = GraphicDatabase.Get<Graphic_Single> ("Things/Pawn/Humanlike/Children/Bodies/Newborn", ShaderDatabase.CutoutSkin, Vector2.one, graphics.pawn.story.SkinColor);
+					}
 				}
 
 				// The pawn is a toddler
 				if (graphics.pawn.ageTracker.CurLifeStageIndex == AgeStage.Toddler) {
 					string upright = "";
-					if (graphics.pawn.ageTracker.AgeBiologicalYears >= AgeStage.Child) {
+					if (graphics.pawn.ageTracker.AgeBiologicalYears >= 1) {
 						upright = "Upright";
 					}
 					graphics.nakedGraphic = GraphicDatabase.Get<Graphic_Multi> ("Things/Pawn/Humanlike/Children/Bodies/Toddler" + upright, ShaderDatabase.CutoutSkin, Vector2.one, graphics.pawn.story.SkinColor);
@@ -217,10 +228,13 @@ namespace RimWorldChildren
 				if (pawn.ageTracker.CurLifeStageIndex == AgeStage.Child) {
 					newPos.z -= 0.15f;
 				}
-				if (pawn.ageTracker != null && pawn.ageTracker.CurLifeStageIndex < AgeStage.Child && pawn.InBed () && !portrait) {
-					Building_Bed building_Bed = pawn.CurrentBed ();
-					if (building_Bed != null) {
-						Vector3 vector = new Vector3 (0, 0, 0.5f).RotatedBy (building_Bed.Rotation.AsAngle);
+				if (pawn.InBed () && !portrait) {
+					Building_Bed bed = pawn.CurrentBed ();
+					if (pawn.ageTracker.CurLifeStageIndex < AgeStage.Child) {
+						Vector3 vector = new Vector3 (0, 0, 0.5f).RotatedBy (bed.Rotation.AsAngle);
+						newPos -= vector;
+					} else if (pawn.ageTracker.CurLifeStageIndex == AgeStage.Child && bed.def.size.z == 1) { // Are we in a crib?
+						Vector3 vector = new Vector3 (0, 0, 0.5f).RotatedBy (bed.Rotation.AsAngle);
 						newPos -= vector;
 					}
 				}
@@ -237,19 +251,29 @@ namespace RimWorldChildren
 			}
 			return newMat;
 		}
+		public static bool EnsurePawnIsChildOrOlder(Pawn pawn){
+			if(pawn.ageTracker.CurLifeStageIndex >= AgeStage.Child)
+				return true;
+			return false;
+		}
 		public static Material ModifyHairForChild(Material mat, Pawn pawn){
 			Material newMat = mat;
 			newMat.mainTexture.wrapMode = TextureWrapMode.Clamp;
 			// Scale down the child hair to fit the head
 			if (pawn.ageTracker.CurLifeStageIndex <= AgeStage.Child) {
 				newMat.mainTextureScale = new Vector2 (1.13f, 1.13f);
-				newMat.mainTextureOffset = new Vector2 (-0.065f, -0.045f);
+				float benis = 0;
+				if (!pawn.Rotation.IsHorizontal) {
+					benis = -0.015f;
+				}
+				newMat.mainTextureOffset = new Vector2 (-0.045f + benis, -0.045f);
 			}
 			// Scale down the toddler hair to fit the head
 			if (pawn.ageTracker.CurLifeStageIndex == AgeStage.Toddler) {
 				newMat.mainTextureOffset = new Vector2 (-0.07f, 0.12f);
 			}
 			return newMat;
+
 		}
 		public static Material ModifyClothingForChild(Material damagedMat, Pawn pawn, Rot4 bodyFacing){
 			Material newDamagedMat = damagedMat;

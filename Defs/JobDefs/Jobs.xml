@@ -29,8 +29,8 @@
   </JobDef>
   
   <JobDef>
-    <defName>BreastFeedBaby</defName>
-    <driverClass>RimWorldChildren.JobDriver_BreastFeedBaby</driverClass>
+    <defName>BreastfeedBaby</defName>
+    <driverClass>RimWorldChildren.JobDriver_BreastfeedBaby</driverClass>
     <reportString>Breastfeeding TargetA.</reportString>
   </JobDef>
   

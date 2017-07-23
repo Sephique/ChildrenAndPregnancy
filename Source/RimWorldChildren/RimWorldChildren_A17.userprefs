@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="RimWorld-Children/RimWorldChildren_A17.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RimWorld-Children/Children_Patches.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RimWorld-Children/Overrides/Children_Drawing.cs">
     <Files>
-      <File FileName="RimWorld-Children/Children_Patches.cs" Line="4" Column="4" />
-      <File FileName="RimWorld-Children/Children_Drawing.cs" Line="1" Column="1" />
-      <File FileName="RimWorld-Children/DetourInjector.cs" Line="3" Column="3" />
-      <File FileName="RimWorld-Children/Overrides/LovinOverride.cs" Line="1" Column="1" />
-      <File FileName="RimWorld-Children/Overrides/Pawn_WearOverride.cs" Line="2" Column="2" />
-      <File FileName="RimWorld-Children/Overrides/Thought_Overrides.cs" Line="96" Column="96" />
+      <File FileName="RimWorld-Children/Children_Core.cs" Line="16" Column="16" />
+      <File FileName="RimWorld-Children/Overrides/Children_DrawingOld.cs" Line="64" Column="64" />
+      <File FileName="RimWorld-Children/Overrides/Children_Drawing.cs" Line="4" Column="4" />
+      <File FileName="RimWorld-Children/Jobs/Driver_BreastfeedBaby.cs" Line="18" Column="18" />
+      <File FileName="RimWorld-Children/Hediffs/Hediff_HumanPregnancy.cs" Line="5" Column="5" />
+      <File FileName="RimWorld-Children/Hediffs/Hediff_Baby.cs" Line="57" Column="57" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

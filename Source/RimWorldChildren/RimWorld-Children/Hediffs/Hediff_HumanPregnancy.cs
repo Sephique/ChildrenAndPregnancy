@@ -83,6 +83,7 @@ namespace RimWorldChildren
 		public void DiscoverPregnancy (){
 			is_discovered = true;
 			Find.LetterStack.ReceiveLetter ("WordHumanPregnancy".Translate(), "MessageIsPregnant".Translate (new object[] { pawn.LabelIndefinite () }), LetterDefOf.Good, pawn, null);
+			 
 		}
 
 		static List<TraitDef> genetic_traits = new List<TraitDef> {
@@ -99,6 +100,40 @@ namespace RimWorldChildren
 			TraitDef.Named("PsychicSensitivity")
 		};
 
+		internal static void GiveRandomBirthDefect(Pawn baby){
+			int r = Rand.Range (1, 9);
+			// Bad back defect
+			if (r == 1)
+				baby.health.AddHediff (HediffDefOf.BadBack, ChildrenUtility.GetPawnBodyPart(baby, "Spine"), null);
+			// cataract defect
+			if (r == 2) {
+				int r1 = Rand.Range (1, 3);
+				if(r1 == 1 || r1 == 3)
+					baby.health.AddHediff (HediffDefOf.Cataract, ChildrenUtility.GetPawnBodyPart(baby, "LeftEye"), null);
+				if(r1 == 2 || r1 == 3)
+					baby.health.AddHediff (HediffDefOf.Cataract, ChildrenUtility.GetPawnBodyPart(baby, "RightEye"), null);
+			}
+			// frail defect
+			if (r == 3)
+				baby.health.AddHediff (HediffDefOf.Frail, null, null);
+			if (r == 4)
+				baby.health.AddHediff (HediffDef.Named ("HearingLoss"), ChildrenUtility.GetPawnBodyPart(baby, "Head"), null);
+			if (r == 5) {
+				baby.health.AddHediff (HediffDef.Named ("DefectBlind"), ChildrenUtility.GetPawnBodyPart(baby, "LeftEye"), null);
+				baby.health.AddHediff (HediffDef.Named ("DefectBlind"), ChildrenUtility.GetPawnBodyPart(baby, "RightEye"), null);
+			}
+			if (r == 6) {
+				baby.health.AddHediff (HediffDef.Named ("DefectHeart"), ChildrenUtility.GetPawnBodyPart (baby, "Heart"), null);
+			}
+			if (r == 7) {
+				baby.health.AddHediff (HediffDef.Named ("DefectStillborn"), null, null);
+			}
+		}
+
+		//
+		// Methods
+		//
+
 		public void DoBirthSpawn (Pawn mother, Pawn father, float chance_successful = 1.0f)
 		{
 			if (mother == null) {
@@ -113,6 +148,7 @@ namespace RimWorldChildren
 			float birthing_quality = mother.health.hediffSet.GetFirstHediffOfDef (HediffDef.Named ("GivingBirth")).TryGetComp<HediffComp_TendDuration> ().tendQuality;
 
 			mother.health.AddHediff (HediffDef.Named ("PostPregnancy"), null, null);
+			mother.health.AddHediff (HediffDef.Named ("Lactating"), ChildrenUtility.GetPawnBodyPart(pawn, "Torso"), null);
 
 			int num = (mother.RaceProps.litterSizeCurve == null) ? 1 : Mathf.RoundToInt (Rand.ByCurve (mother.RaceProps.litterSizeCurve, 300));
 			if (num < 1) {
@@ -355,10 +391,10 @@ namespace RimWorldChildren
 					if (birthing_quality < Rand.Value) {
 						// Add a tear from giving birth
 						if (birthing_quality < Rand.Value) {
-							mother.health.AddHediff (HediffDef.Named ("PregnancyTearMajor"), GetPawnBodyPart (mother, "Torso"), null);
+							mother.health.AddHediff (HediffDef.Named ("PregnancyTearMajor"), ChildrenUtility.GetPawnBodyPart (mother, "Torso"), null);
 						}
 						else
-							mother.health.AddHediff (HediffDef.Named ("PregnancyTear"), GetPawnBodyPart (mother, "Torso"), null);
+							mother.health.AddHediff (HediffDef.Named ("PregnancyTear"), ChildrenUtility.GetPawnBodyPart (mother, "Torso"), null);
 					}
 				}
 			}
@@ -366,44 +402,6 @@ namespace RimWorldChildren
 			pawn.health.RemoveHediff (this);
 		}
 
-		internal static void GiveRandomBirthDefect(Pawn baby){
-			int r = Rand.Range (1, 9);
-			// Bad back defect
-			if (r == 1)
-				baby.health.AddHediff (HediffDefOf.BadBack, GetPawnBodyPart(baby, "Spine"), null);
-			// cataract defect
-			if (r == 2) {
-				int r1 = Rand.Range (1, 3);
-				if(r1 == 1 || r1 == 3)
-					baby.health.AddHediff (HediffDefOf.Cataract, GetPawnBodyPart(baby, "LeftEye"), null);
-				if(r1 == 2 || r1 == 3)
-					baby.health.AddHediff (HediffDefOf.Cataract, GetPawnBodyPart(baby, "RightEye"), null);
-			}
-			// frail defect
-			if (r == 3)
-				baby.health.AddHediff (HediffDefOf.Frail, null, null);
-			if (r == 4)
-				baby.health.AddHediff (HediffDef.Named ("HearingLoss"), GetPawnBodyPart(baby, "Head"), null);
-			if (r == 5) {
-				baby.health.AddHediff (HediffDef.Named ("DefectBlind"), GetPawnBodyPart(baby, "LeftEye"), null);
-				baby.health.AddHediff (HediffDef.Named ("DefectBlind"), GetPawnBodyPart(baby, "RightEye"), null);
-			}
-			if (r == 6) {
-				baby.health.AddHediff (HediffDef.Named ("DefectHeart"), GetPawnBodyPart (baby, "Heart"), null);
-			}
-			if (r == 7) {
-				baby.health.AddHediff (HediffDef.Named ("DefectStillborn"), null, null);
-			}
-		}
-
-		internal static BodyPartRecord GetPawnBodyPart(Pawn pawn, String bodyPart)
-		{
-			return pawn.RaceProps.body.AllParts.Find (x => x.def == DefDatabase<BodyPartDef>.GetNamed(bodyPart, true));
-		}
-
-		//
-		// Methods
-		//
 		public override string DebugString ()
 		{
 			StringBuilder stringBuilder = new StringBuilder ();
@@ -507,7 +505,7 @@ namespace RimWorldChildren
 						Messages.Message ("MessageHavingContractions".Translate (new object[] {	pawn.LabelIndefinite () }).CapitalizeFirst (), pawn, MessageSound.Standard);
 					}
 					// Give the mother the GivingBirth hediff
-					pawn.health.AddHediff (HediffDef.Named ("GivingBirth"), GetPawnBodyPart (pawn, "Torso"), null);
+					pawn.health.AddHediff (HediffDef.Named ("GivingBirth"), ChildrenUtility.GetPawnBodyPart (pawn, "Torso"), null);
 				}
 				// We're having contractions now
 				else {
@@ -521,7 +519,7 @@ namespace RimWorldChildren
 						// Do risky pregnancy
 						DoBirthSpawn (pawn, father, 0.9f);
 						if (Rand.Value <= 0.1f) {
-							pawn.health.AddHediff (HediffDef.Named ("PlacentaBleed"), GetPawnBodyPart (pawn, "Torso"), null);
+							pawn.health.AddHediff (HediffDef.Named ("PlacentaBleed"), ChildrenUtility.GetPawnBodyPart (pawn, "Torso"), null);
 						}
 					}
 				}

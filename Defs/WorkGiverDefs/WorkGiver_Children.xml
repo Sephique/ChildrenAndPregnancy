@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WorkGivers>
+  
+  <WorkGiverDef>
+    <defName>DoBreastfeedBaby</defName>
+    <label>brastfeed baby</label>
+    <giverClass>RimWorldChildren.WorkGiver_BreastfeedBaby</giverClass>
+    <workType>Doctor</workType>
+    <verb>breastfeed baby</verb>
+    <gerund>breastfeeding baby</gerund>
+    <priorityInType>65</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+  
+</WorkGivers>
